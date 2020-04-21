@@ -20,7 +20,6 @@ def parse_args():
     parser.add_argument('-p', '--noise_scale', type=float, help='percentage noise scale', default=15)
     parser.add_argument('-n', '--num_noise', type=int, help='number of noise inputs to use', default=50)
     parser.add_argument('-o', '--overwrite', action='store_true', help='overwrite the output')
-    parser.add_argument('-v', '--view_transition', action='store_true', help='view heatmap after each noised image added')
     args = parser.parse_args()
     if args.model_name not in MODELS:
         print('Invalid model name:', args.model_name)
