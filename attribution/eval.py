@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from scipy.integrate import simps
 from skimage.transform import pyramid_gaussian
 
-from .analyzer import integrated_gradients, smooth_integrated_gradients
+from .analyzer import integrated_gradients, smooth_taylor
 from .constants import *
 
 
