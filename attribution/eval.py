@@ -44,7 +44,7 @@ def compute_autvc(img_input, model, batch_size, transform,
     if analyzer == 'smooth-taylor':
         assert(noise_scale)
         assert(num_roots)
-        attributions = smooth_integrated_gradients(
+        attributions = smooth_taylor(
             inputs=img_input,
             model=model,
             batch_size=batch_size,
@@ -90,15 +90,15 @@ def compute_autvc(img_input, model, batch_size, transform,
     heatmap = np.sum(attributions, axis=0)
 
     # Compute multi-scaled averaged TVs
-    all_atvs = []
-    for (i, resized) in enumerate(pyramid_gaussian(heatmap, downscale=downscale)):
-        # if the image is too small, break from the loop
-        if resized.shape[0] < min_size[0] or resized.shape[1] < min_size[1]:
-            break
-        all_atvs.append(average_total_variation(resized, norm=lp_norm))
-    all_atvs = np.array(all_atvs)
-    autvc = simps(all_atvs, dx=1)
-    return heatmap, all_atvs, autvc
+    multi_scaled_ATV = compute_multiscaled_atv(
+        heatmap=heatmap,
+        downscale=downscale,
+        min_size=min_size,
+        lp_norm=lp_norm
+    )
+
+    autvc = simps(multi_scaled_ATV, dx=1)
+    return heatmap, multi_scaled_ATV, autvc
 
 
 def compute_aupc(img_input, model, batch_size, transform,
@@ -110,7 +110,7 @@ def compute_aupc(img_input, model, batch_size, transform,
     if analyzer == 'smooth-taylor':
         assert(noise_scale)
         assert(num_roots)
-        attributions = smooth_integrated_gradients(
+        attributions = smooth_taylor(
             inputs=img_input,
             model=model,
             batch_size=batch_size,
@@ -173,6 +173,24 @@ def compute_aupc(img_input, model, batch_size, transform,
     perturb_scores = [x / math.fabs(input_score) for x in perturb_scores]  # normalize into between 0 and 1
     aupc = simps(perturb_scores, dx=1)
     return heatmap, perturb_scores, aupc
+
+
+def compute_multiscaled_atv(heatmap, downscale, min_size, lp_norm):
+    """
+    Args:
+        heatmap (array): heatmap of the attribution (summed across channels)
+        downscale (float): proportion to reduce dimension at each step
+        min_size (tuple): minimum dimension to stop pyramid gaussian
+        lp_norm (int): lp normalization to compute total variation
+    """
+    multiscale_atvs = []
+    for (i, resized) in enumerate(pyramid_gaussian(heatmap, downscale=downscale)):
+        # if the image is too small, break from the loop
+        if resized.shape[0] < min_size[0] or resized.shape[1] < min_size[1]:
+            break
+        multiscale_atvs.append(average_total_variation(resized, norm=lp_norm))
+    multiscale_atvs = np.array(multiscale_atvs)
+    return multiscale_atvs
 
 
 def compute_perturbations(img_input, model, batch_size, explained_class, heatmap,
