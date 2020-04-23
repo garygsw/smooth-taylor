@@ -2,7 +2,7 @@
 
 *SmoothTaylor* is a gradient-based attribution method derived from the *Taylor's theorem* for **deep neural network attribution**. It is proposed as a theoretical bridge between *SmoothGrad* [(Smilkov et al.)](https://arxiv.org/abs/2004.10484) and *Integrated Gradients* [(Sundararajan et al.)](https://arxiv.org/abs/1703.01365).
 
-![teaser](method_comparison.png "Sample saliency maps of different attribution methods")
+![teaser](method-comparison.png "Sample saliency maps of different attribution methods")
 
 In our paper, we conduct experiments to compare the performance of *SmoothTaylor* and *Integrated Gradients* using empirical quantitative measures: *perturbations scores* and  *average total variation*, and show that *SmoothTaylor* is able to generate attribution maps that are smoother and more sensitive.
 
