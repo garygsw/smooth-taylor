@@ -229,7 +229,7 @@ If you find our code or paper useful, please cite our paper:
                Alexander Binder},
   title     = {Understanding Integrated Gradients with SmoothTaylor for Deep Neural
                Network Attribution},
-  booktitle = {25th International Conference on Pattern Recognition, {ICPR} 2020,
+  booktitle = {25th International Conference on Pattern Recognition, (ICPR) 2020,
                Virtual Event / Milan, Italy, January 10-15, 2021},
   pages     = {4949--4956},
   publisher = {{IEEE}},
