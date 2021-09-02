@@ -10,9 +10,9 @@ This repository includes a **PyTorch** implementation of _SmoothTaylor_, _Smooth
 
 ## Paper
 
-Goh, S. W. Goh, S. Lapuschkin, L. Weber, W. Samek, and A. Binder (2021). “Un- derstanding Integrated Gradients with SmoothTaylor for Deep Neural Network Attribution”. In: 2020 25th International Conference on Pattern Recognition (ICPR), pp. 4949–4956. DOI:10.1109/ICPR48806.2021.9413242.
+Goh, S. W. Goh, S. Lapuschkin, L. Weber, W. Samek, and A. Binder (2021). “Understanding Integrated Gradients with SmoothTaylor for Deep Neural Network Attribution”. In: 2020 25th International Conference on Pattern Recognition (ICPR), pp. 4949–4956. DOI:10.1109/ICPR48806.2021.9413242.
 
-Links: [Paper](https://arxiv.org/abs/2004.10484) • [Code](https://github.com/garygsw/smooth-taylor) • [Presentation](https://www.dropbox.com/s/xjb1xw6ynlwb7xa/ICPR_2020_Paper_Presentation.pdf?dl=0) • [Poster](https://www.dropbox.com/s/eks6ajkjejyf6tc/Poster%201363%20Understanding%20Integrated%20Gradients%20with%20SmoothTaylor%20for%20Deep%20Neural%20Network%20Attribution.pdf?dl=0)
+Links: [Paper](https://arxiv.org/abs/2004.10484) • [Presentation](https://www.dropbox.com/s/xjb1xw6ynlwb7xa/ICPR_2020_Paper_Presentation.pdf?dl=0) • [Poster](https://www.dropbox.com/s/eks6ajkjejyf6tc/Poster%201363%20Understanding%20Integrated%20Gradients%20with%20SmoothTaylor%20for%20Deep%20Neural%20Network%20Attribution.pdf?dl=0)
 
 ## Setup
 
