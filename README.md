@@ -221,7 +221,7 @@ This work is licensed under MIT License. See [LICENSE](LICENSE.md) for details.
 If you find our code or paper useful, please cite our paper:
 
 ```
-@inproceedings{DBLP:conf/icpr/GohLWSB21,
+@inproceedings{GohLWSB21Understanding,
   author    = {Gary S. W. Goh and
                Sebastian Lapuschkin and
                Leander Weber and
