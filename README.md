@@ -1,18 +1,18 @@
 # Smooth-Taylor
 
-*SmoothTaylor* is a gradient-based attribution method derived from the *Taylor's theorem* for **deep neural network attribution**. It is proposed as a theoretical bridge between *SmoothGrad* [(Smilkov et al.)](https://arxiv.org/abs/2004.10484) and *Integrated Gradients* [(Sundararajan et al.)](https://arxiv.org/abs/1703.01365).
+_SmoothTaylor_ is a gradient-based attribution method derived from the _Taylor's theorem_ for **deep neural network attribution**. It is proposed as a theoretical bridge between _SmoothGrad_ [(Smilkov et al.)](https://arxiv.org/abs/2004.10484) and _Integrated Gradients_ [(Sundararajan et al.)](https://arxiv.org/abs/1703.01365).
 
-![teaser](method_comparison.png "Sample saliency maps of different attribution methods")
+![sample](method_comparison.png "Sample saliency maps of different attribution methods")
 
-In our paper, we conduct experiments to compare the performance of *SmoothTaylor* and *Integrated Gradients* using empirical quantitative measures: *perturbations scores* and  *average total variation*, and show that *SmoothTaylor* is able to generate attribution maps that are smoother and more sensitive.
+In our paper, we conduct experiments to compare the performance of _SmoothTaylor_ and _Integrated Gradients_ using empirical quantitative measures: _perturbations scores_ and _average total variation_, and show that _SmoothTaylor_ is able to generate attribution maps that are smoother and more sensitive.
 
-This repository includes a **PyTorch** implementation of *SmoothTaylor*, *SmoothGrad* and *Integrated Gradients*.
+This repository includes a **PyTorch** implementation of _SmoothTaylor_, _SmoothGrad_ and _Integrated Gradients_.
 
 ## Paper
 
-Gary S. W. Goh, Sebastian Lapuschkin, Leander Weber, Wojciech Samek and Alexander Binder, "Understanding Integrated Gradients with SmoothTaylor for Deep Neural Network Attribution", 2020
+Goh, S. W. Goh, S. Lapuschkin, L. Weber, W. Samek, and A. Binder (2021). “Un- derstanding Integrated Gradients with SmoothTaylor for Deep Neural Network Attribution”. In: 2020 25th International Conference on Pattern Recognition (ICPR), pp. 4949–4956. DOI:10.1109/ICPR48806.2021.9413242.
 
-Link: https://arxiv.org/abs/2004.10484
+Links: [Paper](https://arxiv.org/abs/2004.10484) • [Code](https://github.com/garygsw/smooth-taylor) • [Presentation](https://www.dropbox.com/s/xjb1xw6ynlwb7xa/ICPR_2020_Paper_Presentation.pdf?dl=0) • [Poster](https://www.dropbox.com/s/eks6ajkjejyf6tc/Poster%201363%20Understanding%20Integrated%20Gradients%20with%20SmoothTaylor%20for%20Deep%20Neural%20Network%20Attribution.pdf?dl=0)
 
 ## Setup
 
@@ -20,13 +20,13 @@ Link: https://arxiv.org/abs/2004.10484
 
 Required Python (version 3.7) with standard libraries and following packages version requirements (tested for execution):
 
-- pytorch       1.4.0
-- torchvision   0.5.0
-- scikit-image  0.16.2
-- pillow        7.0.0
-- numpy         1.7.14
-- scipy         1.4.1
-- tqdm          4.36.1
+-   pytorch 1.4.0
+-   torchvision 0.5.0
+-   scikit-image 0.16.2
+-   pillow 7.0.0
+-   numpy 1.7.14
+-   scipy 1.4.1
+-   tqdm 4.36.1
 
 Tested in Ubuntu + Intel i7-6700 CPU + RTX 2080 Ti with Cuda (10.1). CPU-only mode also possible, but running with GPU is highly recommended.
 
@@ -48,8 +48,9 @@ You may also create your own dataset using the PyTorch's `torch.utils.data.Datas
 ### Models
 
 In our experiment, we applied attribution on the following deep neural image classifiers:
-- DenseNet121 [(Huang et al., 2017)](https://github.com/pytorch/vision/blob/master/torchvision/models/densenet.py), and;
-- ResNet152 [(He et al., 2015)](https://github.com/pytorch/vision/blob/master/torchvision/models/resnet.py).
+
+-   DenseNet121 [(Huang et al., 2017)](https://github.com/pytorch/vision/blob/master/torchvision/models/densenet.py), and;
+-   ResNet152 [(He et al., 2015)](https://github.com/pytorch/vision/blob/master/torchvision/models/resnet.py).
 
 They are both pretrained on the ILSVRC2012 ImageNet dataset, and we use the instance in the default `torchvision` url paths. You may use other pretrained image classifier models that are implemented in PyTorch. Just remember to add the name and instance in the `MODELS` dictionary map in `./attribution/constants.py`.
 
@@ -71,6 +72,7 @@ To replicate our experiments, please follow the steps in this section.
     ```
 
     Arguments:
+
     - `-m MODEL_NAME`: use `densenet121` or `resnet152`
     - `-b BATCH_SIZE` (optional): number of image per epoch (default: 128)
 
@@ -78,7 +80,7 @@ To replicate our experiments, please follow the steps in this section.
 
 1. Perform the neural network attribution. We implemented 3 gradient-based attribution methods here:
 
-    1. *SmoothTaylor*
+    1. _SmoothTaylor_
 
         ```bash
         python experiment_smooth_taylor.py [-m MODEL_NAME] [-b BATCH_SIZE]
@@ -86,12 +88,13 @@ To replicate our experiments, please follow the steps in this section.
         ```
 
         Arguments:
+
         - `-m MODEL_NAME`: use `densenet121` or `resnet152`
         - `-b BATCH_SIZE` (optional): number of image per epoch (default: 50)
         - `-s NOISE_SCALE` (optional): magnitude of the noise scale to noise the image (default: 5e-1)
         - `-n NUM_ROOTS` (optional): number of noise inputs to use (default: 150)
 
-    1. *IntegratedGradients*
+    1. _IntegratedGradients_
 
         ```bash
         python experiment_ig.py [-m MODEL_NAME] [-b BATCH_SIZE] [-k STEPS]
@@ -99,19 +102,21 @@ To replicate our experiments, please follow the steps in this section.
         ```
 
         Arguments:
+
         - `-m MODEL_NAME`: use `densenet121` or `resnet152`
         - `-b BATCH_SIZE` (optional): number of image per epoch (default: 50)
         - `-k STEPS` (optional): number of steps along path (default: 50)
         - `-z BASELINE_TYPE` (optional): baseline type [use `zero` or `noise`] (default: `zero`)
         - `-n NUM_NOISE` (optional): number of noise baselines to use (default: 1)
 
-    1. *SmoothGrad*
+    1. _SmoothGrad_
 
         ```bash
-        python experiment_grad.py [-m MODEL_NAME] [-b BATCH_SIZE] [-s] [-p NOISE_SCALE] [-n NUM_NOISE] 
+        python experiment_grad.py [-m MODEL_NAME] [-b BATCH_SIZE] [-s] [-p NOISE_SCALE] [-n NUM_NOISE]
         ```
 
         Arguments:
+
         - `-m MODEL_NAME`: use `densenet121` or `resnet152`
         - `-b BATCH_SIZE` (optional): number of image per epoch (default: 50)
         - `-s` (optional): to use SmoothGrad or not (default: `False`)
@@ -122,7 +127,7 @@ To replicate our experiments, please follow the steps in this section.
 
 1. Evaluate the attribution methods by comparing their heatmaps, using two quantitative evaluation metrics:
 
-    1. *Perturbation Scores* for sensitivity
+    1. _Perturbation Scores_ for sensitivity
 
         ```bash
         python experiment_perturbations.py [-m MODEL_NAME] [-a ANALYZER] [-b BATCH_SIZE]
@@ -134,6 +139,7 @@ To replicate our experiments, please follow the steps in this section.
         ```
 
         Arguments:
+
         - `-m MODEL_NAME`: use `densenet121` or `resnet152`
         - `-a ANALYZER`: attribution method [use `grad`, `smooth-grad`, `smooth-taylor`, or `ig`]
         - `-b BATCH_SIZE` (optional): number of image per epoch (default: 50)
@@ -147,7 +153,7 @@ To replicate our experiments, please follow the steps in this section.
         - `-an` (optional): use adaptive noise (default: `False`)
         - `-af ADAPTIVE_FUNCTION` (optional): objective function for adaptive noising [use `aupc` or `autvc`] (default: `aupc`)
 
-    1. *Average Total Variation* for noisiness
+    1. _Average Total Variation_ for noisiness
 
         ```bash
         python experiment_total_variation.py [-m MODEL_NAME] [-a ANALYZER]
@@ -159,6 +165,7 @@ To replicate our experiments, please follow the steps in this section.
         ```
 
         Arguments:
+
         - `-m MODEL_NAME`: use `densenet121` or `resnet152`
         - `-a ANALYZER`: attribution method [use `grad`, `smooth-grad`, `smooth-taylor`, or `ig`]
         - `-z BASELINE` (optional): IG baseline used [use `zero` or `noise`] (default: zero)
@@ -172,7 +179,7 @@ To replicate our experiments, please follow the steps in this section.
         - `-an` (optional): use adaptive noise (default: `False`)
         - `-af ADAPTIVE_FUNCTION` (optional): objective function for adaptive noising [use `aupc` or `autvc`] (default: `aupc`)
 
-1. Generate *SmoothTaylor* heatmaps with *adaptive noising* hyperparameter tuning technique:
+1. Generate _SmoothTaylor_ heatmaps with _adaptive noising_ hyperparameter tuning technique:
 
     ```bash
     python experiment_adaptive_noising.py [-m MODEL_NAME] [-b BATCH_SIZE]
@@ -186,6 +193,7 @@ To replicate our experiments, please follow the steps in this section.
     ```
 
     Arguments:
+
     - `-m MODEL_NAME`: use `densenet121` or `resnet152`
     - `-b BATCH_SIZE` (optional): number of image per epoch (default: 50)
     - `-r NUM_ROOTS` (optional): number of noise inputs for smoothing (default: 150)
@@ -213,16 +221,23 @@ This work is licensed under MIT License. See [LICENSE](LICENSE.md) for details.
 If you find our code or paper useful, please cite our paper:
 
 ```
-@article{goh2020understanding,
-    title={Understanding Integrated Gradients with SmoothTaylor for Deep Neural Network Attribution},
-    author={Gary S. W. Goh and Sebastian Lapuschkin and Leander Weber and Wojciech Samek and Alexander Binder},
-    year={2020},
-    eprint={2004.10484},
-    archivePrefix={arXiv},
-    primaryClass={cs.CV}
+@inproceedings{goh2020understanding,
+  author    = {Gary S. W. Goh and
+               Sebastian Lapuschkin and
+               Leander Weber and
+               Wojciech Samek and
+               Alexander Binder},
+  title     = {Understanding Integrated Gradients with SmoothTaylor for Deep Neural
+               Network Attribution},
+  booktitle = {25th International Conference on Pattern Recognition, {ICPR} 2020,
+               Virtual Event / Milan, Italy, January 10-15, 2021},
+  pages     = {4949--4956},
+  publisher = {{IEEE}},
+  year      = {2020},
+  doi       = {10.1109/ICPR48806.2021.9413242},
 }
 ```
 
 ## Questions
 
-If you found any bugs, or have any questions, please email to gary_goh@mymail.sutd.edu.sg.
+If you found any bugs, or have any questions, please email to garygsw@gmail.com.
