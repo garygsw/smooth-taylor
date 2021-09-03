@@ -222,21 +222,15 @@ If you find our code or paper useful, please cite our paper:
 
 ```
 @inproceedings{GohLWSB21Understanding,
-  author    = {Gary S. W. Goh and
-               Sebastian Lapuschkin and
-               Leander Weber and
-               Wojciech Samek and
-               Alexander Binder},
-  title     = {Understanding Integrated Gradients with SmoothTaylor for Deep Neural
-               Network Attribution},
+  author = {Goh, Gary S. W. and Lapuschkin, Sebastian and Weber, Leander and Samek, Wojciech and Binder, Alexander},
+  title = {Understanding Integrated Gradients with SmoothTaylor for Deep Neural Network Attribution},
   booktitle = {2020 25th International Conference on Pattern Recognition, (ICPR)},
-  pages     = {4949--4956},
-  publisher = {{IEEE}},
-  year      = {2021},
-  month     = {1},
-  date      = {10-15},
-  location  = {Virtual Event / Milan, Italy},
-  doi       = {10.1109/ICPR48806.2021.9413242},
+  pages = {4949--4956},
+  publisher = {IEEE},
+  year = {2021},
+  address = {Virtual Event / Milan, Italy},
+  doi = {10.1109/ICPR48806.2021.9413242},
+  arxiv = {2004.10484}
 }
 ```
 
